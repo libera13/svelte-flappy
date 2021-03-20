@@ -4,6 +4,10 @@
 
     const game = new GameController();
     let frame = game.newGame()
+
+    setInterval(() => {
+        frame = game.nextFrame();
+    }, 1000 / 90);
 </script>
 
 <style>

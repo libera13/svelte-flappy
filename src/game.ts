@@ -32,7 +32,9 @@ export class GameController {
         public readonly pipeWidth = 50,
         public readonly pipeGap = 150,
         public readonly minTopForTopPipe = 70,
-        public readonly maxTopForTopPipe = 350
+        public readonly maxTopForTopPipe = 350,
+        public readonly generateNewPipePercent = 0.7,
+        public readonly speed = 1,
     ) {
     }
 
@@ -58,6 +60,20 @@ export class GameController {
         )
     }
 
+    public nextFrame() {
+
+        this.frame.firstPipe = this.movePipe(
+            this.frame.firstPipe,
+            this.frame.secondPipe
+        );
+        this.frame.secondPipe = this.movePipe(
+            this.frame.secondPipe,
+            this.frame.firstPipe
+        );
+
+        return this.frame;
+    }
+
     private createPipe(show: boolean): PipePair {
         const height = this.randomYForTopPipe();
 
@@ -76,5 +92,25 @@ export class GameController {
         };
     }
 
+    private movePipe(pipe: PipePair, otherPipe: PipePair) {
+        if (pipe.show && pipe.left <= this.pipeWidth * -1) {
+            pipe.show = false;
+            return pipe;
+        }
+
+        if (pipe.show) {
+            pipe.left -= this.speed;
+        }
+
+        if (
+            otherPipe.left < this.width * (1 - this.generateNewPipePercent) &&
+            otherPipe.show &&
+            !pipe.show
+        ) {
+            return this.createPipe(true);
+        }
+
+        return pipe;
+    }
 
 }
