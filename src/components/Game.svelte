@@ -49,12 +49,11 @@
         font-family: monospace;
         font-size: 16px;
         border: none;
-        border-radius: none;
         background-color: ghostwhite;
         padding: 10px;
         cursor: pointer;
         outline: none;
-        transition: ease-in-out 0.2s font-size;
+        transition: ease-in-out 0.2s;
         display: block;
         margin: 0 auto;
     }

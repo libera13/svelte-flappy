@@ -98,6 +98,19 @@ export class GameController {
             this.frame.firstPipe
         );
 
+        if (this.hasCollidedWithPipe()) {
+            this.frame.gameOver = true;
+            return this.frame;
+        }
+
+        if (
+            this.frame.bird.top >=
+            this.height - this.groundHeight - this.birdSize
+        ) {
+            this.frame.bird.top = this.height - this.groundHeight - this.birdSize;
+            this.frame.gameOver = true;
+            return this.frame;
+        }
         // Gravity section
         if (this.velocity > 0) {
             this.velocity -= this.slowVelocityBy;
@@ -135,6 +148,38 @@ export class GameController {
         if (this.velocity <= 0) {
             this.velocity += this.jumpVelocity;
         }
+    }
+
+    private hasCollidedWithPipe() {
+        if (
+            this.frame.firstPipe.show &&
+            this.checkPipe(this.frame.firstPipe.left)
+        ) {
+            return !(
+                this.frame.bird.top > this.frame.firstPipe.topPipe.height &&
+                this.frame.bird.top + this.birdSize <
+                this.frame.firstPipe.bottomPipe.top
+            );
+        }
+
+        if (
+            this.frame.secondPipe.show &&
+            this.checkPipe(this.frame.secondPipe.left)
+        ) {
+            return !(
+                this.frame.bird.top > this.frame.secondPipe.topPipe.height &&
+                this.frame.bird.top + this.birdSize <
+                this.frame.secondPipe.bottomPipe.top
+            );
+        }
+
+        return false;
+    }
+
+    private checkPipe(left: number) {
+        return (
+            left <= this.birdX + this.birdSize && left + this.pipeWidth >= this.birdX
+        );
     }
 
     private movePipe(pipe: PipePair, otherPipe: PipePair) {
