@@ -86,7 +86,9 @@ export class GameController {
     }
 
     public nextFrame() {
-
+        if (this.frame.gameOver || !this.frame.gameStarted) {
+            return this.frame;
+        }
         this.frame.firstPipe = this.movePipe(
             this.frame.firstPipe,
             this.frame.secondPipe
@@ -122,6 +124,11 @@ export class GameController {
             width: this.pipeWidth,
             show,
         };
+    }
+    public start() {
+        this.newGame();
+        this.frame.gameStarted = true;
+        return this.frame;
     }
 
     public jump() {
