@@ -2,11 +2,17 @@ export interface Frame {
     firstPipe: PipePair;
     secondPipe: PipePair;
     gameOver: boolean;
+    bird: Bird;
     gameStarted: boolean;
     width: number;
     height: number;
     score: number;
     ground: Ground;
+}
+export interface Bird {
+    top: number;
+    left:number;
+    size: number;
 }
 
 export interface Ground {
@@ -41,7 +47,11 @@ export class GameController {
         public readonly generateNewPipePercent = 0.7,
         public readonly speed = 1,
         public readonly groundHeight = 20,
-
+        public readonly birdX = 40,
+        public readonly birdSize = 20,
+        public readonly gravity = 1.5,
+        public readonly jumpVelocity = 10,
+        public readonly slowVelocityBy = 0.23
     ) {
     }
 
@@ -59,7 +69,12 @@ export class GameController {
             gameStarted: false,
             ground: {
                 height: this.groundHeight
-            }
+            },
+            bird: {
+                left: this.birdX,
+                top: this.height / 2 - this.birdSize / 2,
+                size: this.birdSize,
+            },
         }
         return this.frame;
     }
