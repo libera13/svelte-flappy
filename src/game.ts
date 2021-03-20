@@ -6,6 +6,11 @@ export interface Frame {
     width: number;
     height: number;
     score: number;
+    ground: Ground;
+}
+
+export interface Ground {
+    height: number;
 }
 
 export interface PipePair {
@@ -35,6 +40,8 @@ export class GameController {
         public readonly maxTopForTopPipe = 350,
         public readonly generateNewPipePercent = 0.7,
         public readonly speed = 1,
+        public readonly groundHeight = 20,
+
     ) {
     }
 
@@ -49,7 +56,10 @@ export class GameController {
             width: this.width,
             height: this.height,
             gameOver: false,
-            gameStarted: false
+            gameStarted: false,
+            ground: {
+                height: this.groundHeight
+            }
         }
         return this.frame;
     }
