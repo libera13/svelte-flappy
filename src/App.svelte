@@ -3,4 +3,3 @@
 </script>
 
 <Game/>
-<p>hahha</p>

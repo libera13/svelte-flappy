@@ -16,8 +16,6 @@
             class="top-pipe pipe"
     ></section>
     <pre>
-    {JSON.stringify(pipe, null, 2)}
-
         </pre><section
             style="left: {pipe.left}px; top: {pipe.bottomPipe.top}px; width: {pipe.width}px; height: {pipe.bottomPipe.height}px;"
             class="top-bottom pipe"
