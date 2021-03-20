@@ -1,5 +1,7 @@
 Flappy bird game for checking svelte
 
+[Link to website](https://libera13.github.io/svelte-flappy/)
+
 
 ##### Technologies:
 
