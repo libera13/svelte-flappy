@@ -62,11 +62,24 @@
         outline: none;
         font-size: 15px;
     }
+    #score {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 20px;
+        z-index: 10;
+        padding: 5px;
+        font-family: cursive;
+        background-color: white;
+        user-select: none;
+    }
 
 </style>
 
 <main style="width: {frame.width}px; height: {frame.height}px;"
       class="game">
+    <section id="score">{frame.score}</section>
+
     <Bird bird={frame.bird} />
     <Pipe pipe="{frame.firstPipe}"/>
     <Pipe pipe="{frame.secondPipe}"/>

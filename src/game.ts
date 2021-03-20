@@ -116,8 +116,20 @@ export class GameController {
             this.velocity -= this.slowVelocityBy;
         }
 
+        // Add score
+        if (this.frame.firstPipe.left + this.pipeWidth == this.birdX - this.speed) {
+            this.frame.score += 1;
+        }
+
         this.frame.bird.top += Math.pow(this.gravity, 2) - this.velocity;
 
+        // Add Score
+        if (
+            this.frame.secondPipe.left + this.pipeWidth ==
+            this.birdX - this.speed
+        ) {
+            this.frame.score += 1;
+        }
         return this.frame;
     }
 
