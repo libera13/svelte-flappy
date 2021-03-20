@@ -6,6 +6,10 @@
     const game = new GameController();
     let frame = game.newGame()
 
+    function jump() {
+        game.jump();
+    }
+
     setInterval(() => {
         frame = game.nextFrame();
     }, 1000 / 90);
@@ -35,3 +39,4 @@
     <section style="height: {frame.ground.height}px;" id="ground" ></section>
 
 </main>
+<svelte:window on:click="{jump}" />

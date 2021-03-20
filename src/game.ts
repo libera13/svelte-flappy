@@ -41,7 +41,7 @@ export class GameController {
         public readonly height = 800,
         public readonly width = 400,
         public readonly pipeWidth = 50,
-        public readonly pipeGap = 150,
+        public readonly pipeGap = 170,
         public readonly minTopForTopPipe = 70,
         public readonly maxTopForTopPipe = 350,
         public readonly generateNewPipePercent = 0.7,
@@ -96,6 +96,13 @@ export class GameController {
             this.frame.firstPipe
         );
 
+        // Gravity section
+        if (this.velocity > 0) {
+            this.velocity -= this.slowVelocityBy;
+        }
+
+        this.frame.bird.top += Math.pow(this.gravity, 2) - this.velocity;
+
         return this.frame;
     }
 
@@ -115,6 +122,12 @@ export class GameController {
             width: this.pipeWidth,
             show,
         };
+    }
+
+    public jump() {
+        if (this.velocity <= 0) {
+            this.velocity += this.jumpVelocity;
+        }
     }
 
     private movePipe(pipe: PipePair, otherPipe: PipePair) {
